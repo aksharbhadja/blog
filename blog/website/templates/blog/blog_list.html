@@ -1,0 +1,108 @@
+<!-- templates/blog/blog_list.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+    <head>
+        <style>
+            
+            
+            body, h5, p, a {
+                margin: 0;
+                padding: 0;
+                font-family: 'Helvetica', sans-serif;
+            }
+
+            /* Container for the entire content */
+            .container {
+                max-width: 1200px;
+                margin: 20px auto;
+                padding: 20px;
+            }
+
+            /* Style the row of blog cards */
+            .row {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
+            /* Style individual blog cards */
+            .col-md-4 {
+                flex: 0 0 calc(33.333% - 20px);
+                max-width: calc(33.333% - 20px);
+            }
+
+            .card {
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                overflow: hidden;
+                transition: transform 0.3s;
+                background-color: #fff;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .card:hover {
+                transform: scale(1.05);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            }
+
+            .card-img-top {
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .card-body {
+                padding: 20px;
+            }
+
+            .card-title {
+                font-size: 20px;
+                margin-bottom: 10px;
+                color: #333;
+            }
+
+            .card-text {
+                font-size: 16px;
+                color: #555;
+                line-height: 1.5;
+            }
+
+            .btn-primary {
+                background-color: #007bff;
+                color: #fff;
+                text-decoration: none;
+                padding: 10px 15px;
+                border-radius: 5px;
+                display: inline-block;
+                transition: background-color 0.3s;
+            }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                text-decoration: none;
+            }
+
+
+
+        </style>
+    </head>
+    <body>
+        <div class="row">
+            {% for blog in blogs %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="{% if blog.photo_set.all %}{{ blog.photo_set.first.image.url }}{% else %}https://via.placeholder.com/300{% endif %}"
+                            class="card-img-top" alt="Blog Image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ blog.title }}</h5>
+                            <p class="card-text">{{ blog.content|truncatechars:100 }}</p>
+                            <a href="{% url 'blog_detail' blog.id %}" class="btn btn-primary">Read more</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </body>
+{% endblock %}

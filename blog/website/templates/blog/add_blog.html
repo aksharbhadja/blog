@@ -1,0 +1,78 @@
+<!-- templates/blog/add_blog.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <head>
+    <style>
+        body, h1, p, form {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container for the entire content */
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+
+        /* Style the page title */
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        /* Style the form */
+        form {
+            max-width: 500px;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        form input,
+        form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        /* Style the back to blog list link */
+        .back-link {
+            margin-top: 15px;
+        }
+
+        .back-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+  </head>
+  <h1>Add Blog</h1>
+  <form method="post" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Blog</button>
+  </form>
+  <p><a href="{% url 'blog_list' %}">Back to Blog List</a></p>
+{% endblock %}

@@ -1,0 +1,96 @@
+<!-- templates/blog/blog_detail.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <head>
+    <style>
+        body, h1, p {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container for the entire content */
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+
+        /* Style the blog title */
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        /* Style the blog content */
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        /* Style the date */
+        .blog-date {
+            color: #888;
+            font-size: 14px;
+        }
+
+        /* Style the comments section */
+        .comments {
+            margin-top: 30px;
+        }
+
+        /* Style individual comments */
+        .comment {
+            margin-bottom: 15px;
+        }
+
+        /* Style the form section */
+        .add-comment {
+            margin-top: 30px;
+        }
+
+        /* Style the form inputs and button */
+        form {
+            max-width: 600px;
+        }
+
+        form input,
+        form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+  </head>
+  <h1>{{ blog.title }}</h1>
+  <p>{{ blog.content }}</p>
+  <p>{{ blog.date_created }}</p>
+
+  <h2>Comments</h2>
+  {% for comment in comments %}
+    <p>{{ comment.text }} - {{ comment.date_created }}</p>
+  {% endfor %}
+
+  <h2>Add a Comment</h2>
+  <form method="post" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Comment</button>
+  </form>
+{% endblock %}
